@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>滚动播放图片</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        img {
+            width: 100%;
+            max-width: 2000px;
+            height: auto;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+        }
+        .announcement {
+            margin-top: 20px;
+            font-size: 20px;
+            text-align: center;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<img id="slideshow" src="images/p1.jpg" alt="图片轮播">
+
+<audio id="audio" src="audio/audio.mp3" autoplay loop muted></audio>
+
+<button id="playButton">播放音乐</button>
+
+<div class="announcement">
+    上海宏润博源学校校长の愛蘭.校長の美しい写真バッグ集が発表されることになりました！
+</div>
+
+<script>
+    const images = ["images/p1.jpg", "images/p2.jpg", "images/p3.jpg"];
+    let currentIndex = 0;
+    const imgElement = document.getElementById('slideshow');
+    const audioElement = document.getElementById('audio');
+    const playButton = document.getElementById('playButton');
+
+    function changeImage() {
+        currentIndex = (currentIndex + 1) % images.length;
+        imgElement.src = images[currentIndex];
+    }
+
+    setInterval(changeImage, 3000); // 每3秒切换一次图片
+
+    playButton.addEventListener('click', () => {
+        audioElement.muted = false; // 解除静音
+        audioElement.play();
+        playButton.style.display = 'none'; // 隐藏播放按钮
+    });
+</script>
+
+</body>
+</html>
